@@ -62,10 +62,10 @@ function update(){
 	var node = document.getElementById("stops");
 	node.innerHTML = "<ul>";
 	for (var i = 0; i < db.buses[index].bounds.length; i++){
-		node.innerHTML += "<li>Bound " + (i+1) + "<br />";
+		node.innerHTML += "<li style="list-style-type:none">Bound " + (i+1) + "<br />";
 		node.innerHTML += "<ul>";
 		for (var j = 0; j < db.buses[index].bounds[i].stops.length; j++){
-			node.innerHTML += "<li>Stop " + (j+1) + "<br />";
+			node.innerHTML += "<li style="list-style-type:none">Stop " + (j+1) + "<br />";
 			node.innerHTML += "<ul>";
 			node.innerHTML += "<li>Stop name (Eng): " + (db.buses[index].bounds[i].stops[j].stopname_eng) + "</li>";
 			node.innerHTML += "<li>Stop name (Chi): " + (db.buses[index].bounds[i].stops[j].stopname_chi) + "</li>";
