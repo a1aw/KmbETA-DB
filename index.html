@@ -42,9 +42,13 @@ function update(){
 	}
 	
 	var index = -1;
+	var name = $("#routeName").val();
+	console.log("Finding for Name: " + name)
 	for (var i = 0; i < db.buses.length; i++){
-		if (db.buses[i].name == $("#input").val()){
+		if (name == db.buses[i].name){
+			console.log("Found: " + i);
 			index = i;
+			break;
 		}
 	}
 	
@@ -53,6 +57,34 @@ function update(){
 		$("#stops").html("Not found");
 		return;
 	}
+	
+	$("#routestatus").html("Found. Index " + index + " and name " + db.buses[i].name);
+	var node = document.getElementById("stops");
+	node.innerHTML = "<ul>";
+	for (var i = 0; i < db.buses[index].bounds.length; i++){
+		node.innerHTML += "<li>Bound " + (i+1) + "<br />";
+		node.innerHTML += "<ul>";
+		for (var j = 0; j < db.buses[index].bounds[i].stops.length; j++){
+			node.innerHTML += "<li>Stop " + (j+1) + "<br />";
+			node.innerHTML += "<ul>";
+			node.innerHTML += "<li>Stop name (Eng): " + (db.buses[index].bounds[i].stops[j].stopname_eng) + "</li>";
+			node.innerHTML += "<li>Stop name (Chi): " + (db.buses[index].bounds[i].stops[j].stopname_chi) + "</li>";
+			node.innerHTML += "<li>Normal fare (No longer exist): " + (db.buses[index].bounds[i].stops[j].normal_fare) + "</li>";
+			node.innerHTML += "<li>Air conditioner fare (Normal Fare): " + (db.buses[index].bounds[i].stops[j].air_cond_fare) + "</li>";
+			node.innerHTML += "<li>Area: " + (db.buses[index].bounds[i].stops[j].area) + "</li>";
+			node.innerHTML += "<li>Address (Eng): " + (db.buses[index].bounds[i].stops[j].addr_eng) + "</li>";
+			node.innerHTML += "<li>Address (Chi): " + (db.buses[index].bounds[i].stops[j].addr_chi) + "</li>";
+			node.innerHTML += "<li>Stop Sequence: " + (db.buses[index].bounds[i].stops[j].stopseq) + "</li>";
+			node.innerHTML += "<li>Stop code (Subarea): " + (db.buses[index].bounds[i].stops[j].stopcode) + "</li>";
+			node.innerHTML += "<li>Longitude: " + (db.buses[index].bounds[i].stops[j].lng) + "</li>";
+			node.innerHTML += "<li>Latitude: " + (db.buses[index].bounds[i].stops[j].lat) + "</li>";
+			node.innerHTML += "</ul>";
+			node.innerHTML += "</li>";
+		}
+		node.innerHTML += "</ul>";
+		node.innerHTML += "</li>";
+	}
+	node.innerHTML += "</ul>";
 }
 </script>
 </head>
@@ -88,7 +120,7 @@ function update(){
 				<p>Last update (Date): <div id="date">N/A</div></p>
 			<h2>Bus information</h2>
 				<p>Type the route name, and a list of bus stops will be shown.</p>
-				<p>Route name: <div id="input"><input type="text" id="routeName" onkeypress="update()" onchange="update()" value="" /></div></p>
+				<p>Route name: <div id="input"><input type="text" id="routeName" onchange="update()" value="" /><input type="button" onclick="update()" value="Search" /></div></p>
 				<p>Status: <div id="routestatus">N/A</div></p>
 				<p>List of bus stops:</p>
 				<div id="stops">N/A</div>
