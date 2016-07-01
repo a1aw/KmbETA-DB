@@ -58,33 +58,33 @@ function update(){
 		return;
 	}
 	
-	$("#routestatus").html("Found. Index " + index + " and name " + db.buses[i].name);
-	var node = document.getElementById("stops");
-	node.innerHTML = "<ul>";
+	$("#routestatus").html("Found. Index " + index + " and name " + db.buses[i].name + ". " + db.buses[index].bounds.length + " bounds");
+	var str = "<ul>";
 	for (var i = 0; i < db.buses[index].bounds.length; i++){
-		node.innerHTML += "<li style="list-style-type:none">Bound " + (i+1) + "<br />";
-		node.innerHTML += "<ul>";
+		str += "		<li> <b>Bound " + (i+1) + "</b>";
+		str += "			<ul>";
 		for (var j = 0; j < db.buses[index].bounds[i].stops.length; j++){
-			node.innerHTML += "<li style="list-style-type:none">Stop " + (j+1) + "<br />";
-			node.innerHTML += "<ul>";
-			node.innerHTML += "<li>Stop name (Eng): " + (db.buses[index].bounds[i].stops[j].stopname_eng) + "</li>";
-			node.innerHTML += "<li>Stop name (Chi): " + (db.buses[index].bounds[i].stops[j].stopname_chi) + "</li>";
-			node.innerHTML += "<li>Normal fare (No longer exist): " + (db.buses[index].bounds[i].stops[j].normal_fare) + "</li>";
-			node.innerHTML += "<li>Air conditioner fare (Normal Fare): " + (db.buses[index].bounds[i].stops[j].air_cond_fare) + "</li>";
-			node.innerHTML += "<li>Area: " + (db.buses[index].bounds[i].stops[j].area) + "</li>";
-			node.innerHTML += "<li>Address (Eng): " + (db.buses[index].bounds[i].stops[j].addr_eng) + "</li>";
-			node.innerHTML += "<li>Address (Chi): " + (db.buses[index].bounds[i].stops[j].addr_chi) + "</li>";
-			node.innerHTML += "<li>Stop Sequence: " + (db.buses[index].bounds[i].stops[j].stopseq) + "</li>";
-			node.innerHTML += "<li>Stop code (Subarea): " + (db.buses[index].bounds[i].stops[j].stopcode) + "</li>";
-			node.innerHTML += "<li>Longitude: " + (db.buses[index].bounds[i].stops[j].lng) + "</li>";
-			node.innerHTML += "<li>Latitude: " + (db.buses[index].bounds[i].stops[j].lat) + "</li>";
-			node.innerHTML += "</ul>";
-			node.innerHTML += "</li>";
+			str += "			<li> <b> Stop " + (j+1) + "</b>";
+			str += "				<ul>";
+			str += "					<li>Stop name (Eng): " + (db.buses[index].bounds[i].stops[j].stopname_eng) + "</li>";
+			str += "					<li>Stop name (Chi): " + (db.buses[index].bounds[i].stops[j].stopname_chi) + "</li>";
+			str += "					<li>Normal fare (No longer exist): " + (db.buses[index].bounds[i].stops[j].normal_fare) + "</li>";
+			str += "					<li>Air conditioner fare (Normal Fare): " + (db.buses[index].bounds[i].stops[j].air_cond_fare) + "</li>";
+			str += "					<li>Area: " + (db.buses[index].bounds[i].stops[j].area) + "</li>";
+			str += "					<li>Address (Eng): " + (db.buses[index].bounds[i].stops[j].addr_eng) + "</li>";
+			str += "					<li>Address (Chi): " + (db.buses[index].bounds[i].stops[j].addr_chi) + "</li>";
+			str += "					<li>Stop Sequence: " + (db.buses[index].bounds[i].stops[j].stopseq) + "</li>";
+			str += "					<li>Stop code (Subarea): " + (db.buses[index].bounds[i].stops[j].stopcode) + "</li>";
+			str += "					<li>Longitude: " + (db.buses[index].bounds[i].stops[j].lng) + "</li>";
+			str += "					<li>Latitude: " + (db.buses[index].bounds[i].stops[j].lat) + "</li>";
+			str += "				</ul>";
+			str += "			</li>";
 		}
-		node.innerHTML += "</ul>";
-		node.innerHTML += "</li>";
+		str += "			</ul>";
+		str += "		</li>";
 	}
-	node.innerHTML += "</ul>";
+	str += "</ul>";
+	document.getElementById("stops").innerHTML = str;
 }
 </script>
 </head>
