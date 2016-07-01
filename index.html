@@ -16,6 +16,9 @@ function load(){
 		},
 		success: function(data){
 			db = data;
+			$("#status").html("Available");
+			$("#time").html(db.generated);
+			$("#date").html(db.generated_human);
 		}
 	});
 }
