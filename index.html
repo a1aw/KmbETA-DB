@@ -10,7 +10,7 @@ function load(){
 		url: "https://db.kmbeta.ml/kmbeta_db.json",
 		type: "GET",
 		dataType: "json",
-		async: false,
+		async: true,
 		error: function(){
 			$("#status").html("Failed to fetch database.");
 		},
