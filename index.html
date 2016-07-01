@@ -23,26 +23,40 @@ function load(){
 			$("#numbuses").html(db.routes.length);
 			$("#numroutes").html(db.buses.length);
 			
-			var node = document.getElementById("buses");
-			node.innerHTML = "<ul>";
+			var str = "<ul>";
 			for (var i = 0; i < db.buses.length; i++){
-				node.innerHTML += "<li>" + db.buses[i].name + "</li>";
+				str += "<li>" + db.buses[i].name + "</li>";
 			}
-			node.innerHTML += "</ul>";
+			str += "</ul>";
+			
+			document.getElementById("buses").innerHTML = str;
+			
+			str = "<select id='routeName'>";
+			for (var i = 0; i < db.buses.length; i++){
+				str += "<option value='" + db.buses[i].name + "'>" + db.buses[i].name + "</option>";
+			}
+			str += "</select>";
+			
+			document.getElementById("selection").innerHTML = str;
 		}
 	});
 }
 
 function update(){
-	if (db == null){
-		$("#input").html("N/A");
+	if (db == null || db == ""){
 		$("#routestatus").html("N/A");
 		$("#stops").html("N/A");
 		return;
 	}
 	
-	var index = -1;
 	var name = $("#routeName").val();
+	
+	if (name == ""){
+		$("#routestatus").html("No route selected");
+		$("#stops").html("No route selected");
+		return;
+	}
+	var index = -1;
 	console.log("Finding for Name: " + name)
 	for (var i = 0; i < db.buses.length; i++){
 		if (name == db.buses[i].name){
@@ -84,6 +98,10 @@ function update(){
 		str += "		</li>";
 	}
 	str += "</ul>";
+	
+	if (db.buses[index].bounds.length <= 0){
+		str = "<font color='#ff0000'>Database resulted 0 bounds. Seems this route's data cannot be fetched.</font>";
+	}
 	document.getElementById("stops").innerHTML = str;
 }
 </script>
@@ -120,7 +138,7 @@ function update(){
 				<p>Last update (Date): <div id="date">N/A</div></p>
 			<h2>Bus information</h2>
 				<p>Type the route name, and a list of bus stops will be shown.</p>
-				<p>Route name: <div id="input"><input type="text" id="routeName" onchange="update()" value="" /><input type="button" onclick="update()" value="Search" /></div></p>
+				<p>Route name: <div id="selection"><select id="routeName" onchange="update()"><option value="">-- None --</option></select></div><input type="button" onclick="update()" value="Search" /></p>
 				<p>Status: <div id="routestatus">N/A</div></p>
 				<p>List of bus stops:</p>
 				<div id="stops">N/A</div>
