@@ -19,6 +19,16 @@ function load(){
 			$("#status").html("Available");
 			$("#time").html(db.generated);
 			$("#date").html(db.generated_human);
+			
+			$("#numbuses").html(db.routes.length);
+			$("#numroutes").html(db.buses.length);
+			
+			var node = document.getElementById("buses");
+			node.innerHTML = "<ul>";
+			for (var i = 0; i < db.buses.length; i++){
+				node.innerHTML += "<li>" + db.buses[i].name + "</li>";
+			}
+			node.innerHTML += "</ul>";
 		}
 	});
 }
@@ -33,7 +43,7 @@ function update(){
 	
 	var index = -1;
 	for (var i = 0; i < db.buses.length; i++){
-		if (db.buses[i].name == $("#input").value()){
+		if (db.buses[i].name == $("#input").val()){
 			index = i;
 		}
 	}
