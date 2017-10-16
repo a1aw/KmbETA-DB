@@ -7,15 +7,15 @@ var db = null;
 
 function load(){
 	$.ajax({
-		url: "https://db.kmbeta.ml/kmbeta_db.json",
+		url: "https://db.kmbeta.ml/kmbeta_db.b64",
 		type: "GET",
-		dataType: "json",
+		dataType: "text",
 		async: true,
 		error: function(){
 			$("#status").html("Failed to fetch database.");
 		},
 		success: function(data){
-			db = data;
+			db = JSON.parse(atob(data));
 			$("#status").html("Available");
 			$("#time").html(db.generated);
 			$("#date").html(db.generated_human);
